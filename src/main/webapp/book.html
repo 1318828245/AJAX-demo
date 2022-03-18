@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="addBook.html"><input type="button" value="新增"></a><br>
+<hr>
+<table id="bookTable" border="1" cellspacing="0" width="100%">
+    <tr align="center">
+        <th>书籍序号</th>
+        <th>书籍名称</th>
+        <th>书籍价格</th>
+        <th>出版社名称</th>
+        <th>点击修改数据</th>
+        <th>点击删除数据</th>
+    </tr>
+    <tr align="center">
+        <td>1</td>
+        <td>数学</td>
+        <td>12</td>
+        <td>北京出版社</td>
+        <td><a href="#">修改</a> </td>
+        <td><a href="#">删除</a> </td>
+    </tr>
+    <tr align="center">
+        <td>2</td>
+        <td>语文</td>
+        <td>13</td>
+        <td>北京出版社</td>
+        <td><a href="#">修改</a> </td>
+        <td><a href="#">删除</a> </td>
+    </tr>
+    <tr align="center">
+        <td>3</td>
+        <td>英语</td>
+        <td>6</td>
+        <td>吉林出版社</td>
+        <td><a href="#">修改</a> </td>
+        <td><a href="#">删除</a> </td>
+    </tr>
+    </table>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    //当页面加载完成之后，发送ajax请求
+    window.onload=function (){
+        //2.发送ajax请求
+        axios({
+            method:"get",
+            url:"http://localhost/AJAX_demo_war/selectAllServlet"
+        }).then(function (resp){
+let books=resp.data;
+
+let tableData=" <tr align=\"center\">\n" +
+    "        <th>书籍序号</th>\n" +
+    "        <th>书籍名称</th>\n" +
+    "        <th>书籍价格</th>\n" +
+    "        <th>出版社名称</th>\n" +
+    "        <th>点击修改数据</th>\n" +
+    "        <th>点击删除数据</th>\n" +
+    "    </tr>";
+for (let i=0;i<books.length;i++){
+    let book=books[i];
+    tableData+="<tr align=\"center\">\n" +
+        "        <td>"+(i+1)+"</td>\n" +
+        "        <td>"+book.bookName+"</td>\n" +
+        "        <td>"+book.bookPrice+"</td>\n" +
+        "        <td>"+book.publishName+"</td>\n" +
+        "        <td><a href=\"#\">修改</a> </td>\n" +
+        "        <td><a href=\"#\">删除</a> </td>\n" +
+        "    </tr>";
+}
+//设置表格数据
+            document.getElementById("bookTable").innerHTML=tableData;
+        })
+    }
+</script>
+
+</body>
+</html>

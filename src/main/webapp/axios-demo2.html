@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    //1.get方法
+    /*axios({
+        method:"get",
+        url:"http://localhost/AJAX_demo_war/axiosServlet?username=msj"
+    }).then(function (resp){
+        alert(resp.data)
+    })*/
+
+    //1.get方法
+    axios.get("http://localhost/AJAX_demo_war/axiosServlet?username=msj").then(function (resp){
+        alert(resp.data)
+    })
+    //1.post方法
+    axios.post("http://localhost/AJAX_demo_war/axiosServlet","username=msj").then(function (resp){
+        alert(resp.data)
+    })
+    /*axios({
+        method:"post",
+        url:"http://localhost/AJAX_demo_war/axiosServlet?username=msj"
+    }).then(function (resp){
+        alert(resp.data)
+    })*/
+</script>
+</body>
+</html>

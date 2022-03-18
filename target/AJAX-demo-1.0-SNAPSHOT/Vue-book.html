@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+   <a href="Vue-addBook.html"><input type="button" value="新增"></a><br>
+    <hr>
+    <table id="bookTable" border="1" cellspacing="0" width="100%">
+        <tr align="center">
+            <th>书籍序号</th>
+            <th>书籍名称</th>
+            <th>书籍价格</th>
+            <th>出版社名称</th>
+            <th>点击修改数据</th>
+            <th>点击删除数据</th>
+        </tr>
+        <!--使用v-for来遍历-->
+        <tr v-for="(book,i) in books" align="center">
+            <td>{{i+1}}</td>
+            <td>{{book.bookName}}</td>
+            <td>{{book.bookPrice}}</td>
+            <td>{{book.publishName}}</td>
+            <td><a href="#">修改</a> </td>
+            <td><a href="#">删除</a> </td>
+        </tr>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="http://cdn.jsdelivr.net_npm_vue@2.6.14_dist_vue.js"></script>
+
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+                books:[
+                ]
+            }
+        },
+        mounted() {
+            //页面加载完成后，发送异步请求,查询数据
+            var _this = this;
+            axios({
+                method: "get",
+                url: "http://localhost/AJAX_demo_war/selectAllServlet"
+            }).then(function (resp) {
+                _this.books = resp.data;
+            })
+        }
+    })
+</script>
+</body>
+</html>

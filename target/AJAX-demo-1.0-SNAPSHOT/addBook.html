@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>添加书籍</h3>
+<form action="" method="post">
+    书籍名称：<input name="bookName" id="bookName" ><br>
+    书籍价格：<input name="bookPrice" id="bookPrice"><br>
+    出版社名称：<input name="publishName" id="publishName"><br>
+    <input type="button" id="btn" value="提交">
+</form>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+<script>
+    //1.给按钮绑定单机事件
+    document.getElementById("btn").onclick=function (){
+        //1.将表单数据转为json
+        var formData={
+            bookName:"",
+            bookPrice:"",
+            publishName:"",
+        };
+        //获取表单数据
+        let bookName=document.getElementById("bookName").value;
+        //设置数据
+        formData.bookName=bookName;
+
+        let bookPrice=document.getElementById("bookPrice").value;
+        //设置数据
+        formData.bookPrice=bookPrice;
+
+        let publishName=document.getElementById("publishName").value;
+        //设置数据
+        formData.publishName=publishName;
+
+       //console.log(formData);
+
+
+        //2.发送axios数据
+        axios({
+            method:"post",
+            url:"http://localhost/AJAX_demo_war/addServlet",
+            data:formData
+        }).then(function (response){
+               //判断响应数据是否为success
+            if (response.data=="success"){
+                location.href="http://localhost/AJAX_demo_war/book.html"
+            }
+        })
+    }
+</script>
+</body>
+</html>

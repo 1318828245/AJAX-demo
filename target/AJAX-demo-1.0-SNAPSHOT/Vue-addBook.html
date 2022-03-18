@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app1">
+     <h3>添加书籍</h3>
+          <form method="post">
+              书籍名称：<input name="bookName" id="bookName" v-modle="book.bookName" ><br>
+              书籍价格：<input name="bookPrice" id="bookPrice" v-modle="book.bookPrice"><br>
+              出版社名称：<input name="publishName" id="publishName" v-modle="book.publishName"><br>
+              <input type="button" id="btn" @click="submitForm" value="提交">
+          </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="http://cdn.jsdelivr.net_npm_vue@2.6.14_dist_vue.js"></script>
+<script>
+    new Vue({
+        el:"#app1",
+        data(){
+            return {
+                book:{}
+            }
+        },
+        methods:{
+             submitForm(){
+               //发送ajax请求
+                var _this = this;
+                 axios({
+                    method:"post",
+                    url:"http://localhost/AJAX_demo_war/addServlet",
+                    data:_this.book
+                }).then(function (response){
+                    //判断响应数据是否为success
+                    if (response.data=="success"){
+                        location.href="http://localhost/AJAX_demo_war/Vue-book.html"
+                    }
+                })
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>
